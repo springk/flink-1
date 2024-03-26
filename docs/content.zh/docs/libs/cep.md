@@ -1392,7 +1392,7 @@ val patternStream: PatternStream[Event] = CEP.pattern(input, pattern, comparator
 ```java
 class MyPatternProcessFunction<IN, OUT> extends PatternProcessFunction<IN, OUT> {
     @Override
-    public void processMatch(Map<String, List<IN>> match, Context ctx, Collector<OUT> out) throws Exception;
+    public void processMatch(Map<String, List<IN>> match, Context ctx, Collector<OUT> out) throws Exception{
         IN startEvent = match.get("start").get(0);
         IN endEvent = match.get("end").get(0);
         out.collect(OUT(startEvent, endEvent));
@@ -1415,12 +1415,12 @@ class MyPatternProcessFunction<IN, OUT> extends PatternProcessFunction<IN, OUT> 
 ```java
 class MyPatternProcessFunction<IN, OUT> extends PatternProcessFunction<IN, OUT> implements TimedOutPartialMatchHandler<IN> {
     @Override
-    public void processMatch(Map<String, List<IN>> match, Context ctx, Collector<OUT> out) throws Exception;
+    public void processMatch(Map<String, List<IN>> match, Context ctx, Collector<OUT> out) throws Exception{
         ...
     }
 
     @Override
-    public void processTimedOutMatch(Map<String, List<IN>> match, Context ctx) throws Exception;
+    public void processTimedOutMatch(Map<String, List<IN>> match, Context ctx) throws Exception{
         IN startEvent = match.get("start").get(0);
         ctx.output(outputTag, T(startEvent));
     }
